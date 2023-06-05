@@ -3,16 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "typechain --target=ethers-v5 \"./src/abis/**/*.json\" --out-dir=\"./src/types/abi\" && next dev",
+    "build": "typechain --target=ethers-v5 \"./src/abis/**/*.json\" --out-dir=\"./src/types/abi\" && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typechain": "typechain --target=ethers-v5 \"./src/abis/**/*.json\" --out-dir=\"./src/types/abi\""
   },
   "dependencies": {
     "@reactivers/hooks": "^1.0.15",
     "@types/node": "18.16.2",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
+    "@web3-react/core": "^8.2.0",
     "autoprefixer": "10.4.14",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",

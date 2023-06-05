@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren } from 'react'
-import { useDimensions } from '@reactivers/hooks'
 import { useImmer, Updater } from 'use-immer'
 
 type GlobalState = {
@@ -22,11 +21,7 @@ const defaultState = {
 const GlobalStoreContext = createContext({ globalState: defaultState } as GlobalStore)
 
 const GlobalStoreProvider = ({ children }: PropsWithChildren) => {
-    const dimensions = useDimensions()
     const [globalState, setGlobalState] = useImmer({ ...defaultState })
-
-    console.log('globalState', globalState)
-    console.log('dimensions', dimensions)
 
     return (
         <GlobalStoreContext.Provider value={{ globalState, setGlobalState }}>

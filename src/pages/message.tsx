@@ -1,6 +1,6 @@
 import { Navbar } from '~/components'
 
-export default function Home() {
+export default function Messages() {
     return (
         <>
             <Navbar />
