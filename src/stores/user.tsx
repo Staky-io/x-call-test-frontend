@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { createContext, PropsWithChildren, useEffect } from 'react'
+import { createContext, PropsWithChildren } from 'react'
 import { useImmer } from 'use-immer'
 import { NETWORKS } from '~/helpers/constants'
 
@@ -41,13 +41,14 @@ const UserStoreProvider = ({ children }: PropsWithChildren) => {
             const signer = new ethers.JsonRpcSigner(provider, accounts[0])
             const { chainId } = await provider.getNetwork()
 
-            provider.on('chainChanged', (chainId: string) => {
+            window.ethereum.on('chainChanged', (chainId: string) => {
+                console.log('chainChanged', chainId)
                 setUserState((s) => {
                     s.wrongNetwork = !supportedChainIds.includes(BigInt(chainId))
                 })
             })
 
-            provider.on('accountsChanged', (accounts: string[]) => {
+            window.ethereum.on('accountsChanged', (accounts: string[]) => {
                 setUserState((s) => {
                     s.address = accounts[0]
                 })

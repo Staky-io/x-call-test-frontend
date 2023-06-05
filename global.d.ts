@@ -1,3 +1,7 @@
-interface Window {
-    ethereum: import('ethers').Eip1193Provider;
+import { BrowserProvider, Eip1193Provider } from 'ethers/types/providers'
+
+declare global {
+    interface Window {
+        ethereum: Eip1193Provider & BrowserProvider;
+    }
 }

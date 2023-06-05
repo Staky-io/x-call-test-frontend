@@ -6,8 +6,6 @@ import { UserStoreContext } from '~/stores/user'
 export default function Navbar() {
     const { userState, disconnect, connectWallet } = useContext(UserStoreContext)
 
-    console.log('userState', userState, connectWallet)
-
     return (
         <div className="w-full flex flex-row justify-between items-center px-12 select-none">
             <Link href="/" className="font-semibold text-xl text-gray-500">
