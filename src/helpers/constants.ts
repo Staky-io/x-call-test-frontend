@@ -1,27 +1,33 @@
-import { NetworkList } from '~/types'
+import { AddressesList, NetworkList } from '~/types'
 
 export const NETWORKS: NetworkList = {
-    SEPOLIA: {
+    ETH: {
         chainId: 11155111,
         chainName: 'Sepolia test network',
         btpID: '0xaa36a7.eth2',
+        rpcUrls: ['https://rpc2.sepolia.org'],
         nativeCurrency: {
             name: 'Sepolia ETH',
-            symbol: 'ETH'
-        }
+            symbol: 'ETH',
+            decimals: 18
+        },
+        blockExplorerUrls: ['https://sepolia.etherscan.io/']
     },
-    BSC_TESTNET: {
+    BSC: {
         chainId: 97,
         chainName: 'BSC Testnet',
         btpID: '0x61.bsc',
+        rpcUrls: ['https://bsc-testnet.publicnode.com'],
         nativeCurrency: {
             name: 'Testnet BNB',
-            symbol: 'tBNB'
-        }
+            symbol: 'tBNB',
+            decimals: 18
+        },
+        blockExplorerUrls: ['https://testnet.bscscan.com']
     }
 }
 
-export const ADDRESSES = {
+export const ADDRESSES: AddressesList = {
     BSC: {
         BMCM: '0xFd82803c9b2E92C628846012c6E5016Ac380f68d',
         BMCS: '0x6AB5fB039ABbEE20bf43F84393E528015686fB04',
