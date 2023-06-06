@@ -7,7 +7,7 @@ export default function Navbar() {
     const { userState, disconnect, connectWallet } = useContext(UserStoreContext)
 
     return (
-        <div className="w-full flex flex-row justify-between items-center px-12 select-none">
+        <div className="fixed top-0 left-0 w-full flex flex-row justify-between items-center px-12 select-none">
             <Link href="/" className="font-semibold text-xl text-gray-500">
                 X-Call-Demo
             </Link>
