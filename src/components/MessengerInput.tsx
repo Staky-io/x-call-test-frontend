@@ -8,6 +8,7 @@ import { UserStoreContext } from '~/stores/user'
 export default function MessengerInput() {
     const [xCallFee, setXCallFee] = useState(BigInt(0))
     const [message, setMessage] = useState('')
+    const [txHash, setTxHash] = useState('')
     const [from, setFrom] = useState('ETH')
     const [to, setTo] = useState('BSC')
     const { userState, connectWallet, switchChain } = useContext(UserStoreContext)
@@ -19,12 +20,15 @@ export default function MessengerInput() {
 
             if (messenger != null) {
                 const fee = await messenger.getXCallFee(btpAddress, true)
+                setXCallFee(fee)
                 return fee
             }
 
+            setXCallFee(BigInt(0))
             return BigInt(0)
         } catch (e) {
             console.log(e)
+            setXCallFee(BigInt(0))
             return BigInt(0)
         }
     }, [messenger, to])
@@ -32,8 +36,11 @@ export default function MessengerInput() {
     const sendMessage = async () => {
         const fee = await getXCallFee()
         if (fee != null && messenger != null && message.length > 0 && userState.balance > fee) {
+            setTxHash('')
             const tx = await messenger.sendMessage(getBTPAddress(ADDRESSES[to].MESSENGER, NETWORKS[to].btpID), message, { value: fee })
             await tx.wait()
+            setMessage('')
+            setTxHash(tx.hash)
         }
     }
 
@@ -72,7 +79,7 @@ export default function MessengerInput() {
 
                 <p
                     className="text-sm mt-2"
-                    onClick={switchNetworks}
+                    onClick={getXCallFee}
                 >
                     X-Call fee: {ethers.formatEther(xCallFee)} {NETWORKS[from].nativeCurrency.symbol}
                 </p>
@@ -109,6 +116,17 @@ export default function MessengerInput() {
                     >
                         Connect your wallet
                     </button>
+                )}
+
+                {txHash.length > 0 && (
+                    <a
+                        href={`${NETWORKS[from].blockExplorerUrls[0]}/tx/${txHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-sm underline mt-2"
+                    >
+                        View transaction on {NETWORKS[from].chainName} explorer
+                    </a>
                 )}
             </div>
         </div>
