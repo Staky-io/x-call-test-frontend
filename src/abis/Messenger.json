@@ -120,7 +120,7 @@
                 "type": "string"
             },
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "string",
                 "name": "_messageID",
                 "type": "string"
@@ -139,7 +139,7 @@
                 "type": "address"
             },
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "string",
                 "name": "_messageID",
                 "type": "string"
